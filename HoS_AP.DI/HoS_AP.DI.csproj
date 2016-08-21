@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{31A4090E-009C-44B8-8D74-6571515BA31D}</ProjectGuid>
+    <ProjectGuid>{0C9513DD-C779-47F3-A6DE-8D370CE7FED9}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>HoS_AP.DAL</RootNamespace>
-    <AssemblyName>HoS_AP.DAL</AssemblyName>
+    <RootNamespace>HoS_AP.DI</RootNamespace>
+    <AssemblyName>HoS_AP.DI</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,28 +30,34 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DaoInterfaces\IAccountDao.cs" />
-    <Compile Include="Dao\AccountDao.cs" />
-    <Compile Include="Dao\FileSystemRepository.cs" />
-    <Compile Include="Dto\Account.cs" />
+    <Compile Include="DependencyDescription.cs" />
+    <Compile Include="DryIoc\AsyncExecutionFlowScopeContext.cs" />
+    <Compile Include="DryIoc\Container.cs" />
+    <Compile Include="DryIoc\FactoryCompiler.cs" />
+    <Compile Include="DryIoc\ImTools.cs" />
+    <Compile Include="IOC.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TypeDependencyDescription.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HoS_AP.BLL\HoS_AP.BLL.csproj">
+      <Project>{943C89AC-D272-4AFD-96A8-26C09D80FDB4}</Project>
+      <Name>HoS_AP.BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HoS_AP.DAL\HoS_AP.DAL.csproj">
+      <Project>{31A4090E-009C-44B8-8D74-6571515BA31D}</Project>
+      <Name>HoS_AP.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HoS_AP.Misc\HoS_AP.Misc.csproj">
+      <Project>{8107731F-3918-416E-880D-42642E6AE75D}</Project>
+      <Name>HoS_AP.Misc</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

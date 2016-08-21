@@ -88,15 +88,36 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\custom.css" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="packages.config" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-theme.min.css.map" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <None Include="Scripts\jquery-1.9.1.intellisense.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\jquery-1.9.1.js" />
+    <Content Include="Scripts\jquery-1.9.1.min.js" />
     <Content Include="Views\Character\Index.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Web.config" />
-    <Content Include="Views\Login\Login.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Character\Add.cshtml" />
     <Content Include="Views\Character\Edit.cshtml" />
+    <Content Include="Scripts\jquery-1.9.1.min.map" />
+    <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -111,17 +132,27 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\CharacterController.cs" />
-    <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ModelErrorExtension.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="MyControllerFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <ProjectReference Include="..\HoS_AP.DAL\HoS_AP.DAL.csproj">
-      <Project>{31A4090E-009C-44B8-8D74-6571515BA31D}</Project>
-      <Name>HoS_AP.DAL</Name>
+    <ProjectReference Include="..\HoS_AP.BLL\HoS_AP.BLL.csproj">
+      <Project>{943c89ac-d272-4afd-96a8-26c09d80fdb4}</Project>
+      <Name>HoS_AP.BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HoS_AP.DI\HoS_AP.DI.csproj">
+      <Project>{0C9513DD-C779-47F3-A6DE-8D370CE7FED9}</Project>
+      <Name>HoS_AP.DI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HoS_AP.Misc\HoS_AP.Misc.csproj">
+      <Project>{8107731F-3918-416E-880D-42642E6AE75D}</Project>
+      <Name>HoS_AP.Misc</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
