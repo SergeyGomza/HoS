@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 
 namespace HoS_AP.DAL.Dao
 {
-    public class FileSystemRepository
+    internal class FileSystemRepository
     {
         private readonly string basePath;
         private const string defaultAccount = "[{'UserName':'Megan', 'Password':'1000:KmPsJ6b8qrf5d0flq2JZ7pZfXFiIZWfK:VeuXPEkDBL5B3rCCfE7OPVLumsX0NAJT'}]";

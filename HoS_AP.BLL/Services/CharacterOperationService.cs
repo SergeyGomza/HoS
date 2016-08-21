@@ -9,7 +9,7 @@ using HoS_AP.DAL.Dto;
 
 namespace HoS_AP.BLL.Services
 {
-    public class CharacterOperationService : ICharacterOperationService
+    internal class CharacterOperationService : ICharacterOperationService
     {
         private readonly IValidationService validationService;
         private readonly ICharacterDao characterDao;
@@ -20,7 +20,7 @@ namespace HoS_AP.BLL.Services
             this.characterDao = characterDao;
         }
 
-        public ValidationResult Save(CharacterEditModel model)
+        ValidationResult ICharacterOperationService.Save(CharacterEditModel model)
         {
             var validaitonErrors = validationService.Validate(model);
             if (validaitonErrors.Any())
@@ -32,18 +32,23 @@ namespace HoS_AP.BLL.Services
                 ? new Character() : 
                 characterDao.Load(model.Id);
 
+            if (character == null)
+            {
+                throw new InvalidOperationException("Character does not exist anymore");
+            }
+
             model.MapTo(ref character);
             characterDao.Save(character);
 
-            return ValidationResult.Ok;      
+            return ValidationResult.Ok;
         }
 
-        public void Delete(string name)
+        void ICharacterOperationService.Delete(string name)
         {
             SetDeleted(name, true);
         }
 
-        public void Recover(string name)
+        void ICharacterOperationService.Recover(string name)
         {
             SetDeleted(name, false);
         }

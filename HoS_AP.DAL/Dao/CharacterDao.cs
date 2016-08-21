@@ -6,7 +6,7 @@ using HoS_AP.DAL.Dto;
 
 namespace HoS_AP.DAL.Dao
 {
-    public class CharacterDao : FileSystemRepository, ICharacterDao
+    internal class CharacterDao : FileSystemRepository, ICharacterDao
     {
         ICollection<Character> ICharacterDao.Load()
         {

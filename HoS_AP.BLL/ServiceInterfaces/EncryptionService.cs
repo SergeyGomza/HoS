@@ -9,38 +9,12 @@ namespace HoS_AP.BLL.ServiceInterfaces
     ///     www: http://crackstation.net/hashing-security.htm
     ///     Compatibility: .NET 3.0 and later.
     /// </summary>
-    public class EncryptionService : IEncryptionService
+    internal class EncryptionService : IEncryptionService
     {
         // The following constants may be changed without breaking existing hashes.
-        private const int SALT_BYTE_SIZE = 24;
-        private const int HASH_BYTE_SIZE = 24;
-        private const int PBKDF2_ITERATIONS = 1000;
-
         private const int ITERATION_INDEX = 0;
         private const int SALT_INDEX = 1;
         private const int PBKDF2_INDEX = 2;
-
-        /// <summary>
-        ///     Creates a salted PBKDF2 hash of the password.
-        /// </summary>
-        /// <param name="password">The password to hash.</param>
-        /// <returns>The hash of the password.</returns>
-        public string Encrypt(string password)
-        {
-            // Generate a random salt
-
-            var salt = new byte[SALT_BYTE_SIZE];
-            using (var csprng = new RNGCryptoServiceProvider())
-            {
-                csprng.GetBytes(salt);
-            }
-
-            // Hash the password and encode the parameters
-            var hash = PBKDF2(password, salt, PBKDF2_ITERATIONS, HASH_BYTE_SIZE);
-            return PBKDF2_ITERATIONS + ":" +
-                   Convert.ToBase64String(salt) + ":" +
-                   Convert.ToBase64String(hash);
-        }
 
         /// <summary>
         ///     Validates a password given a hash of the correct one.
@@ -48,7 +22,7 @@ namespace HoS_AP.BLL.ServiceInterfaces
         /// <param name="password">The password to check.</param>
         /// <param name="correctHash">A hash of the correct password.</param>
         /// <returns>True if the password is correct. False otherwise.</returns>
-        public bool IsValidPassword(string password, string correctHash)
+        bool IEncryptionService.IsValidPassword(string password, string correctHash)
         {
             if (password == null)
             {

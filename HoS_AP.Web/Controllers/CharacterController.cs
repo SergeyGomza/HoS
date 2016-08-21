@@ -26,21 +26,13 @@ namespace HoS_AP.Web.Controllers
         [Route("add")]
         public ActionResult Add()
         {
-            return View(new CharacterEditModel() {Active = true });
+            return View(new CharacterEditModel {Active = true });
         }
 
         [Route("add"), HttpPost]
         public ActionResult Add(CharacterEditModel model)
         {
             return Edit(model);
-            //var operationResult = characterOperationService.Save(model);
-            //if (operationResult.IsValid)
-            //{
-            //    return RedirectToAction("Index");
-            //}
-
-            //operationResult.ToModelErrors(ModelState);
-            //return View(model);
         }
 
         [Route("{name}/edit")]

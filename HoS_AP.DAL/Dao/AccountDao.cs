@@ -4,7 +4,7 @@ using HoS_AP.DAL.Dto;
 
 namespace HoS_AP.DAL.Dao
 {
-    public class AccountDao : FileSystemRepository, IAccountDao
+    internal class AccountDao : FileSystemRepository, IAccountDao
     {
         Account IAccountDao.Load(string userName)
         {

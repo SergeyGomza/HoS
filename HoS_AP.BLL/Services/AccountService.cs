@@ -6,20 +6,26 @@ using HoS_AP.DAL.DaoInterfaces;
 
 namespace HoS_AP.BLL.Services
 {
-    public class AccountService : IAccountService
+    internal class AccountService : IAccountService
     {
         private readonly IValidationService validationService;
         private readonly IAccountDao accountDao;
         private readonly IEncryptionService encryptionService;
+        private readonly IValidationMessageProvider validationMessageProvider;
 
-        public AccountService(IValidationService validationService, IAccountDao accountDao, IEncryptionService encryptionService)
+        public AccountService(
+            IValidationService validationService, 
+            IAccountDao accountDao, 
+            IEncryptionService encryptionService, 
+            IValidationMessageProvider validationMessageProvider)
         {
             this.validationService = validationService;
             this.accountDao = accountDao;
             this.encryptionService = encryptionService;
+            this.validationMessageProvider = validationMessageProvider;
         }
 
-        public ValidationResult Authenticate(AuthenticationModel model)
+        ValidationResult IAccountService.Authenticate(AuthenticationModel model)
         {
             var validaitonErrors = validationService.Validate(model);
             if (validaitonErrors.Any())
@@ -30,12 +36,12 @@ namespace HoS_AP.BLL.Services
             var account = accountDao.Load(model.UserName);
             if (account == null)
             {
-                return new ValidationResult("UserName", "Sorry, Credentials are not valid");
+                return new ValidationResult("UserName", validationMessageProvider.Get(ValidationMessageKeys.Authentication_Invalid_Credentials));
             }
 
             if (!encryptionService.IsValidPassword(model.Password, account.Password))
             {
-                return new ValidationResult("UserName", "Sorry, Credentials are not valid");
+                return new ValidationResult("UserName", validationMessageProvider.Get(ValidationMessageKeys.Authentication_Invalid_Credentials));
             }
 
             return ValidationResult.Ok;

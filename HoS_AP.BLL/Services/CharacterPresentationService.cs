@@ -6,7 +6,7 @@ using HoS_AP.DAL.DaoInterfaces;
 
 namespace HoS_AP.BLL.Services
 {
-    public class CharacterPresentationService : ICharacterPresentationService
+    internal class CharacterPresentationService : ICharacterPresentationService
     {
         private readonly ICharacterDao characterDao;
 
@@ -15,12 +15,12 @@ namespace HoS_AP.BLL.Services
             this.characterDao = characterDao;
         }
 
-        public ICollection<CharacterListItemModel> List()
+        ICollection<CharacterListItemModel> ICharacterPresentationService.List()
         {
             return characterDao.Load().Select(x => new CharacterListItemModel(x)).ToList();
         }
 
-        public CharacterEditModel Load(string name)
+        CharacterEditModel ICharacterPresentationService.Load(string name)
         {
             var character = characterDao.Load(name);
             if (character == null) return null;

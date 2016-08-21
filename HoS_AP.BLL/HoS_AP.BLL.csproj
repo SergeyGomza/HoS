@@ -47,8 +47,10 @@
     <Compile Include="ServiceInterfaces\EncryptionService.cs" />
     <Compile Include="ServiceInterfaces\ICharacterPresentationService.cs" />
     <Compile Include="ServiceInterfaces\IEncryptionService.cs" />
+    <Compile Include="ServiceInterfaces\IValidationMessageProvider.cs" />
     <Compile Include="Services\CharacterOperationService.cs" />
     <Compile Include="Services\CharacterPresentationService.cs" />
+    <Compile Include="Services\ValidationMessageProvider.cs" />
     <Compile Include="Validation\IValidationService.cs" />
     <Compile Include="Models\AuthenticationModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -56,6 +58,7 @@
     <Compile Include="Services\AccountService.cs" />
     <Compile Include="Validation\ValidationError.cs" />
     <Compile Include="Validation\ValidationErrorExtension.cs" />
+    <Compile Include="Validation\ValidationMessageKeys.cs" />
     <Compile Include="Validation\ValidationService.cs" />
     <Compile Include="Validation\Validators\AuthenticationModelValidator.cs" />
     <Compile Include="Validation\Validators\CharacterEditModelValidator.cs" />

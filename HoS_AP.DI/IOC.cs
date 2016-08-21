@@ -30,6 +30,7 @@ namespace HoS_AP.DI
         {
             Register(new TypeDependencyDescription<IAccountDao, AccountDao>(), Reuse.Singleton);
             Register(new TypeDependencyDescription<ICharacterDao, CharacterDao>(), Reuse.Singleton);
+            Register(new TypeDependencyDescription<IValidationMessageProvider, ValidationMessageProvider>(), Reuse.Singleton);
             Register(new TypeDependencyDescription<IValidationService, ValidationService>(), Reuse.Singleton);
             Register(new TypeDependencyDescription<IEncryptionService, EncryptionService>(), Reuse.Singleton);
             Register(new TypeDependencyDescription<IAccountService, AccountService>(), Reuse.Singleton);
