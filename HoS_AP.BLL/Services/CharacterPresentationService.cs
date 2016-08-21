@@ -19,5 +19,12 @@ namespace HoS_AP.BLL.Services
         {
             return characterDao.Load().Select(x => new CharacterListItemModel(x)).ToList();
         }
+
+        public CharacterEditModel Load(string name)
+        {
+            var character = characterDao.Load(name);
+            if (character == null) return null;
+            return new CharacterEditModel(character);
+        }
     }
 }

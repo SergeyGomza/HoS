@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using HoS_AP.DAL.DaoInterfaces;
 using HoS_AP.DAL.Dto;
@@ -20,6 +21,11 @@ namespace HoS_AP.DAL.Dao
         void ICharacterDao.Save(Character character)
         {
             base.Save(character);
+        }
+
+        Character ICharacterDao.Load(Guid Id)
+        {
+            return Characters.FirstOrDefault(x => x.Id == Id);
         }
     }
 }

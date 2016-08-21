@@ -4,6 +4,8 @@ namespace HoS_AP.BLL.ServiceInterfaces
 {
     public interface ICharacterOperationService
     {
-        ValidationResult Create(CharacterEditModel model);
+        ValidationResult Save(CharacterEditModel model);
+        void Delete(string name);
+        void Recover(string name);
     }
 }

@@ -20,7 +20,7 @@ namespace HoS_AP.BLL.Services
             this.characterDao = characterDao;
         }
 
-        public ValidationResult Create(CharacterEditModel model)
+        public ValidationResult Save(CharacterEditModel model)
         {
             var validaitonErrors = validationService.Validate(model);
             if (validaitonErrors.Any())
@@ -30,12 +30,30 @@ namespace HoS_AP.BLL.Services
 
             var character = model.Id == Guid.Empty 
                 ? new Character() : 
-                characterDao.Load(model.Name);
+                characterDao.Load(model.Id);
 
             model.MapTo(ref character);
             characterDao.Save(character);
 
             return ValidationResult.Ok;      
+        }
+
+        public void Delete(string name)
+        {
+            SetDeleted(name, true);
+        }
+
+        public void Recover(string name)
+        {
+            SetDeleted(name, false);
+        }
+
+        private void SetDeleted(string name, bool deleted)
+        {
+            var character = characterDao.Load(name);
+            if (character == null) return;
+            character.Deleted = deleted;
+            characterDao.Save(character);
         }
     }
 }

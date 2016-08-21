@@ -26,13 +26,39 @@ namespace HoS_AP.Web.Controllers
         [Route("add")]
         public ActionResult Add()
         {
-            return View(new CharacterEditModel());
+            return View(new CharacterEditModel() {Active = true });
         }
 
         [Route("add"), HttpPost]
         public ActionResult Add(CharacterEditModel model)
         {
-            var operationResult = characterOperationService.Create(model);
+            return Edit(model);
+            //var operationResult = characterOperationService.Save(model);
+            //if (operationResult.IsValid)
+            //{
+            //    return RedirectToAction("Index");
+            //}
+
+            //operationResult.ToModelErrors(ModelState);
+            //return View(model);
+        }
+
+        [Route("{name}/edit")]
+        public ActionResult Edit(string name)
+        {
+            var model = characterPresentationService.Load(name);
+            if (model == null)
+            {
+                return new HttpNotFoundResult();
+            }
+
+            return View(model);
+        }
+
+        [Route("{name}/edit"), HttpPost]
+        public ActionResult Edit(CharacterEditModel model)
+        {
+            var operationResult = characterOperationService.Save(model);
             if (operationResult.IsValid)
             {
                 return RedirectToAction("Index");
@@ -42,16 +68,18 @@ namespace HoS_AP.Web.Controllers
             return View(model);
         }
 
-        [Route("{name}/edit")]
-        public ActionResult Edit(string name)
+        [Route("{name}/delete"), HttpPost]
+        public ActionResult Delete(string name)
         {
-            return View();
+            characterOperationService.Delete(name);
+            return RedirectToAction("Index");
         }
 
-        [Route("{name}/edit"), HttpPost]
-        public ActionResult Edit(string name, CharacterEditModel model)
+        [Route("{name}/recover"), HttpPost]
+        public ActionResult Recover(string name)
         {
-            return View();
+            characterOperationService.Recover(name);
+            return RedirectToAction("Index");
         }
     }
 }
