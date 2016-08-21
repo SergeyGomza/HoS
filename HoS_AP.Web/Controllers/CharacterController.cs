@@ -1,14 +1,22 @@
 ﻿using System.Web.Mvc;
+using HoS_AP.BLL.ServiceInterfaces;
 
 namespace HoS_AP.Web.Controllers
 {
     [Authorize, RoutePrefix("characters")]
     public class CharacterController : Controller
     {
+        private readonly ICharacterPresentationService characterPresentationService;
+
+        public CharacterController(ICharacterPresentationService characterPresentationService)
+        {
+            this.characterPresentationService = characterPresentationService;
+        }
+
         [Route]
         public ActionResult Index()
         {
-            return View();
+            return View(characterPresentationService.List());
         }
 
         [Route("add")]

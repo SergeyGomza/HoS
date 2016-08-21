@@ -39,9 +39,12 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\CharacterListItemModel.cs" />
     <Compile Include="Models\ValidationResult.cs" />
     <Compile Include="ServiceInterfaces\EncryptionService.cs" />
+    <Compile Include="ServiceInterfaces\ICharacterPresentationService.cs" />
     <Compile Include="ServiceInterfaces\IEncryptionService.cs" />
+    <Compile Include="Services\CharacterPresentationService.cs" />
     <Compile Include="Validation\IValidationService.cs" />
     <Compile Include="Models\AuthenticationModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -59,6 +62,10 @@
     <ProjectReference Include="..\HoS_AP.DAL\HoS_AP.DAL.csproj">
       <Project>{31A4090E-009C-44B8-8D74-6571515BA31D}</Project>
       <Name>HoS_AP.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HoS_AP.Misc\HoS_AP.Misc.csproj">
+      <Project>{8107731F-3918-416E-880D-42642E6AE75D}</Project>
+      <Name>HoS_AP.Misc</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

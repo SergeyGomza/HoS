@@ -45,13 +45,22 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DaoInterfaces\IAccountDao.cs" />
+    <Compile Include="DaoInterfaces\ICharacterDao.cs" />
     <Compile Include="Dao\AccountDao.cs" />
+    <Compile Include="Dao\CharacterDao.cs" />
     <Compile Include="Dao\FileSystemRepository.cs" />
     <Compile Include="Dto\Account.cs" />
+    <Compile Include="Dto\Character.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HoS_AP.Misc\HoS_AP.Misc.csproj">
+      <Project>{8107731F-3918-416E-880D-42642E6AE75D}</Project>
+      <Name>HoS_AP.Misc</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

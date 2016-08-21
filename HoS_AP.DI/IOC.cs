@@ -29,9 +29,11 @@ namespace HoS_AP.DI
         private void RegisterServices()
         {
             Register(new TypeDependencyDescription<IAccountDao, AccountDao>(), Reuse.Singleton);
+            Register(new TypeDependencyDescription<ICharacterDao, CharacterDao>(), Reuse.Singleton);
             Register(new TypeDependencyDescription<IValidationService, ValidationService>(), Reuse.Singleton);
             Register(new TypeDependencyDescription<IEncryptionService, EncryptionService>(), Reuse.Singleton);
             Register(new TypeDependencyDescription<IAccountService, AccountService>(), Reuse.Singleton);
+            Register(new TypeDependencyDescription<ICharacterPresentationService, CharacterPresentationService>(), Reuse.Singleton);
         }
 
         private InversionOfControlContainer(IContainer container)
