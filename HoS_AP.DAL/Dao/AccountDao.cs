@@ -6,7 +6,7 @@ namespace HoS_AP.DAL.Dao
 {
     public class AccountDao : FileSystemRepository, IAccountDao
     {
-        public Account Load(string userName)
+        Account IAccountDao.Load(string userName)
         {
             return Accounts.FirstOrDefault(x => x.UserName == userName);
         }

@@ -34,6 +34,7 @@ namespace HoS_AP.DI
             Register(new TypeDependencyDescription<IEncryptionService, EncryptionService>(), Reuse.Singleton);
             Register(new TypeDependencyDescription<IAccountService, AccountService>(), Reuse.Singleton);
             Register(new TypeDependencyDescription<ICharacterPresentationService, CharacterPresentationService>(), Reuse.Singleton);
+            Register(new TypeDependencyDescription<ICharacterOperationService, CharacterOperationService>(), Reuse.Singleton);
         }
 
         private InversionOfControlContainer(IContainer container)

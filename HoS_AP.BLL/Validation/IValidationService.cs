@@ -6,5 +6,7 @@ namespace HoS_AP.BLL.Validation
     public interface IValidationService
     {
         ICollection<ValidationError> Validate(AuthenticationModel model);
+
+        ICollection<ValidationError> Validate(CharacterEditModel model);
     }
 }

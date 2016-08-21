@@ -32,14 +32,4 @@ namespace HoS_AP.BLL.Models
             }
         }
     }
-
-    public class ValidationResult<T> : ValidationResult
-    {
-        internal ValidationResult(T model, ICollection<ValidationError> errors) : base(errors)
-        {
-            Model = model;
-        }
-
-        public T Model { get; }
-    }
 }

@@ -1,4 +1,5 @@
 ﻿using System.Web.Mvc;
+using HoS_AP.BLL.Models;
 using HoS_AP.BLL.ServiceInterfaces;
 
 namespace HoS_AP.Web.Controllers
@@ -7,10 +8,13 @@ namespace HoS_AP.Web.Controllers
     public class CharacterController : Controller
     {
         private readonly ICharacterPresentationService characterPresentationService;
+        private readonly ICharacterOperationService characterOperationService;
 
-        public CharacterController(ICharacterPresentationService characterPresentationService)
+        public CharacterController(ICharacterPresentationService characterPresentationService, 
+            ICharacterOperationService characterOperationService)
         {
             this.characterPresentationService = characterPresentationService;
+            this.characterOperationService = characterOperationService;
         }
 
         [Route]
@@ -22,13 +26,20 @@ namespace HoS_AP.Web.Controllers
         [Route("add")]
         public ActionResult Add()
         {
-            return View();
+            return View(new CharacterEditModel());
         }
 
         [Route("add"), HttpPost]
-        public ActionResult Add(object model)
+        public ActionResult Add(CharacterEditModel model)
         {
-            return View();
+            var operationResult = characterOperationService.Create(model);
+            if (operationResult.IsValid)
+            {
+                return RedirectToAction("Index");
+            }
+
+            operationResult.ToModelErrors(ModelState);
+            return View(model);
         }
 
         [Route("{name}/edit")]
@@ -38,7 +49,7 @@ namespace HoS_AP.Web.Controllers
         }
 
         [Route("{name}/edit"), HttpPost]
-        public ActionResult Edit(string name, object model)
+        public ActionResult Edit(string name, CharacterEditModel model)
         {
             return View();
         }

@@ -1,7 +1,7 @@
 ﻿using System.Web.Mvc;
 using HoS_AP.BLL.Models;
 
-namespace HoS_AP.Web.Controllers
+namespace HoS_AP.Web
 {
     public static class ModelErrorExtension
     {

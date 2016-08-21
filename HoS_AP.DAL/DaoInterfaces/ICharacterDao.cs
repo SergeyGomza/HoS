@@ -6,5 +6,9 @@ namespace HoS_AP.DAL.DaoInterfaces
     public interface ICharacterDao
     {
         ICollection<Character> Load();
+
+        Character Load(string name);
+
+        void Save(Character character);
     }
 }

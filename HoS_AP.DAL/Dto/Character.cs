@@ -5,6 +5,7 @@ namespace HoS_AP.DAL.Dto
 {
     public class Character
     {
+        public Guid Id { get; set; }
         public string Name { get; set; }
         public CharacterTypes Type { get; set; }
         public DateTime Created { get; set; }

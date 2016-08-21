@@ -39,11 +39,15 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Mappers\CharacterMapper.cs" />
+    <Compile Include="Models\CharacterEditModel.cs" />
     <Compile Include="Models\CharacterListItemModel.cs" />
     <Compile Include="Models\ValidationResult.cs" />
+    <Compile Include="ServiceInterfaces\ICharacterOperationService.cs" />
     <Compile Include="ServiceInterfaces\EncryptionService.cs" />
     <Compile Include="ServiceInterfaces\ICharacterPresentationService.cs" />
     <Compile Include="ServiceInterfaces\IEncryptionService.cs" />
+    <Compile Include="Services\CharacterOperationService.cs" />
     <Compile Include="Services\CharacterPresentationService.cs" />
     <Compile Include="Validation\IValidationService.cs" />
     <Compile Include="Models\AuthenticationModel.cs" />
@@ -54,6 +58,7 @@
     <Compile Include="Validation\ValidationErrorExtension.cs" />
     <Compile Include="Validation\ValidationService.cs" />
     <Compile Include="Validation\Validators\AuthenticationModelValidator.cs" />
+    <Compile Include="Validation\Validators\CharacterEditModelValidator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

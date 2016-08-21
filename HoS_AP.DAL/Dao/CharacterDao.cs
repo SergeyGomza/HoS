@@ -7,9 +7,19 @@ namespace HoS_AP.DAL.Dao
 {
     public class CharacterDao : FileSystemRepository, ICharacterDao
     {
-        public ICollection<Character> Load()
+        ICollection<Character> ICharacterDao.Load()
         {
             return Characters.ToList();
+        }
+
+        Character ICharacterDao.Load(string name)
+        {
+            return Characters.FirstOrDefault(x => x.Name == name);
+        }
+
+        void ICharacterDao.Save(Character character)
+        {
+            base.Save(character);
         }
     }
 }

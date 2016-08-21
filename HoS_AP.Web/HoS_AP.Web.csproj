@@ -133,7 +133,7 @@
   <ItemGroup>
     <Compile Include="Controllers\CharacterController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\ModelErrorExtension.cs" />
+    <Compile Include="ModelErrorExtension.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
