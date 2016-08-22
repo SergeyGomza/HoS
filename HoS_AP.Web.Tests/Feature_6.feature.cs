@@ -66,10 +66,10 @@ namespace HoS_AP.Web.Tests
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Beeing able to authenticate")]
-        public virtual void BeeingAbleToAuthenticate()
+        [NUnit.Framework.DescriptionAttribute("Being able to authenticate")]
+        public virtual void BeingAbleToAuthenticate()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Beeing able to authenticate", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Being able to authenticate", ((string[])(null)));
 #line 6
 this.ScenarioSetup(scenarioInfo);
 #line hidden

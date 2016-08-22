@@ -3,7 +3,7 @@
     In order to feel that character control is in secure
     I want to have administration tool secured by username and password
 
-Scenario: Beeing able to authenticate
+Scenario: Being able to authenticate
     Given Given there is are following users in the system
         | Name  | Password |
         | Megan | 123456   |

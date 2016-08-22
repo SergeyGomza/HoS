@@ -65,10 +65,10 @@ namespace HoS_AP.Web.Tests
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Beeing able to delete character")]
-        public virtual void BeeingAbleToDeleteCharacter()
+        [NUnit.Framework.DescriptionAttribute("Being able to delete character")]
+        public virtual void BeingAbleToDeleteCharacter()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Beeing able to delete character", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Being able to delete character", ((string[])(null)));
 #line 6
 this.ScenarioSetup(scenarioInfo);
 #line hidden

@@ -65,10 +65,10 @@ namespace HoS_AP.Web.Tests
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Beeing able to recover character")]
-        public virtual void BeeingAbleToRecoverCharacter()
+        [NUnit.Framework.DescriptionAttribute("Being able to recover character")]
+        public virtual void BeingAbleToRecoverCharacter()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Beeing able to recover character", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Being able to recover character", ((string[])(null)));
 #line 6
 this.ScenarioSetup(scenarioInfo);
 #line hidden
