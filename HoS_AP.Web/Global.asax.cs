@@ -13,7 +13,7 @@ namespace HoS_AP.Web
         protected void Application_Start(object sender, EventArgs e)
         {
             RouteTable.Routes.MapMvcAttributeRoutes();
-
+            ModelValidatorProviders.Providers.Clear();
             var container = new InversionOfControlContainer();
             container.RegisterControllers(
                 Assembly.GetExecutingAssembly()

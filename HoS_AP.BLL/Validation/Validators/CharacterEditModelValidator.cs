@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
 using HoS_AP.BLL.Models;
+using HoS_AP.BLL.ServiceInterfaces;
 using HoS_AP.DAL.DaoInterfaces;
-using HoS_AP.Misc;
 
 namespace HoS_AP.BLL.Validation.Validators
 {
@@ -9,17 +9,22 @@ namespace HoS_AP.BLL.Validation.Validators
     {
         private readonly ICharacterDao characterDao;
 
-        public CharacterEditModelValidator(ICharacterDao characterDao)
+        public CharacterEditModelValidator(ICharacterDao characterDao, IValidationMessageProvider validationMessageProvider)
         {
             this.characterDao = characterDao;
-            RuleFor(x => x.Name).NotEmpty()
+            RuleFor(x => x.Name)
+                .NotEmpty()
+                    .WithMessage(validationMessageProvider.Get(ValidationMessageKeys.CharacterEdit_Name_Required))
                 .Matches("^[a-zA-Z ]+$")
-                    .WithMessage("Please use only english letters and space")
+                    .WithMessage(validationMessageProvider.Get(ValidationMessageKeys.CharacterEdit_Name_Special_Characters))
                 .Must((model, name) => BeUnique(model))
-                    .WithMessage("Sorry. Character with such name is already registered in the system");
+                    .WithMessage(validationMessageProvider.Get(ValidationMessageKeys.CharacterEdit_Name_Must_Be_Unique));
             RuleFor(x => x.Price)   
-                .InclusiveBetween(5, 25).WithMessage("Please set value between 5 and 25");
-            RuleFor(x => x.Type).NotEqual(CharacterTypes.None);
+                .InclusiveBetween(5, 25)
+                    .WithMessage(validationMessageProvider.Get(ValidationMessageKeys.CharacterEdit_Price_Boundaries));
+            RuleFor(x => x.Type)
+                .NotEmpty()
+                    .WithMessage(validationMessageProvider.Get(ValidationMessageKeys.CharacterEdit_Type_Required));
         }
 
         private bool BeUnique(CharacterEditModel model)

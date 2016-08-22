@@ -7,6 +7,7 @@ namespace HoS_AP.Web
     {
         public static void ToModelErrors(this ValidationResult validationResult, ModelStateDictionary modelState)
         {
+            modelState.Clear();
             foreach (var validationError in validationResult.Errors)
             {
                 modelState.AddModelError(validationError.Property, validationError.Message);

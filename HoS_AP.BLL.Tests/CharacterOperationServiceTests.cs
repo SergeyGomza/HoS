@@ -95,7 +95,6 @@ namespace HoS_AP.BLL.Tests
             characterDao.Verify(x => x.Save(It.Is<Character>(c => ReferenceEquals(c.Name, model.Name))), Times.Once);
         }
 
-
         [Test]
         public void Save_should_update_character()
         {
