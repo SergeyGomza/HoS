@@ -4,15 +4,22 @@ namespace HoS_AP.Web.Tests
 {
     internal static class UrlManager
     {
-        private static readonly IDictionary<PageTypes, string> knownPages = new Dictionary<PageTypes, string>
+        private static readonly IDictionary<string, string> knownPages = new Dictionary<string, string>
         {
-            {PageTypes.Login, GetAbsoluteUrl("/")},
-            {PageTypes.Listing, GetAbsoluteUrl("/characters")}
+            {"Login", GetAbsoluteUrl("/")},
+            {"Listing", GetAbsoluteUrl("/characters")},
+            {"Add", GetAbsoluteUrl("/characters/add")}
         };
 
-        internal static string GetPage(PageTypes type)
+        internal static string GetPage(string pageName)
         {
-            return knownPages[type];
+            if (pageName.StartsWith("Edit "))
+            {
+                var entity = pageName.Replace("Edit ", string.Empty);
+                return GetAbsoluteUrl(string.Format("/characters/{0}/edit", entity));
+            }
+
+            return knownPages[pageName];
         }
 
         private static string GetAbsoluteUrl(string relativeUrl)

@@ -44,7 +44,6 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
     <Reference Include="TechTalk.SpecFlow, Version=2.1.0.0, Culture=neutral, PublicKeyToken=0778194805d6db41, processorArchitecture=MSIL">
       <HintPath>..\packages\SpecFlow.2.1.0\lib\net45\TechTalk.SpecFlow.dll</HintPath>
@@ -52,6 +51,10 @@
     </Reference>
     <Reference Include="WebDriver, Version=2.53.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Selenium.WebDriver.2.53.1\lib\net40\WebDriver.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="WebDriver.Support, Version=2.53.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Selenium.Support.2.53.1\lib\net40\WebDriver.Support.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>
@@ -70,7 +73,31 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Feature_1.feature</DependentUpon>
     </Compile>
-    <Compile Include="PageTypes.cs" />
+    <Compile Include="Feature_2.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Feature_2.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Feature_3.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Feature_3.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Feature_4.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Feature_4.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Feature_5.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Feature_5.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Feature_6.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Feature_6.feature</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Steps.cs" />
     <Compile Include="UrlManager.cs" />
@@ -82,9 +109,33 @@
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>Feature_1.feature.cs</LastGenOutput>
     </None>
+    <None Include="Feature_2.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>Feature_2.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Feature_3.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>Feature_3.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Feature_4.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>Feature_4.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Feature_5.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>Feature_5.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Feature_6.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>Feature_6.feature.cs</LastGenOutput>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\HoS_AP.BLL\HoS_AP.BLL.csproj">
+      <Project>{943C89AC-D272-4AFD-96A8-26C09D80FDB4}</Project>
+      <Name>HoS_AP.BLL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\HoS_AP.DAL\HoS_AP.DAL.csproj">
       <Project>{31A4090E-009C-44B8-8D74-6571515BA31D}</Project>
       <Name>HoS_AP.DAL</Name>

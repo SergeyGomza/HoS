@@ -4,13 +4,17 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Web.UI.WebControls;
+using HoS_AP.BLL.ServiceInterfaces;
 using HoS_AP.DAL.Dto;
 using HoS_AP.Misc;
 using Newtonsoft.Json;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.IE;
+using OpenQA.Selenium.Support.UI;
 using TechTalk.SpecFlow;
+using Table = TechTalk.SpecFlow.Table;
 
 namespace HoS_AP.Web.Tests
 {
@@ -73,25 +77,21 @@ namespace HoS_AP.Web.Tests
 
         [Given(@"I am logged in as “(.*)”")]
         [When(@"I am logged in as “(.*)”")]
-        public void GivenIAmLoggedInAsMegan(string username)
+        public void IAmLoggedInAsMegan(string username)
         {
-            InternetExplorerDriver.Navigate().GoToUrl(UrlManager.GetPage(PageTypes.Login));
-            var usernameElement = InternetExplorerDriver.FindElementByName("UserName");
-            var passwordElement = InternetExplorerDriver.FindElementByName("Password");
-            usernameElement.SendKeys(username);
-            passwordElement.SendKeys(UserManager.GetPassword(username));
-            var signInButton = InternetExplorerDriver.FindElementByXPath(".//input[@type='submit' and @value='Sign In']");
-            signInButton.Submit();
-        }
-        
-        [When(@"I navigate to “(.*)” page")]
-        public void WhenINavigateToCharacterListingPage(string pageName)
-        {
-            ScenarioContext.Current.Pending();
+            var userTable = new Table("Name", "Password");
+            userTable.AddRow(username, UserManager.GetPassword(username));
+            ThereIsAreFollowingUsersInTheSystem(userTable);
+            INavigateToPage("Login");
+            var table = new Table("UserName", "Password");
+            table.AddRow("UserName", username);
+            table.AddRow("Password", UserManager.GetPassword(username));
+            IFillInControlsAsFollows(table);
+            IClickButton("Sign In");
         }
 
         [Given(@"there are the following characters in system")]
-        public void GivenThereAreTheFollowingCharactersInSystem(Table table)
+        public void ThereAreTheFollowingCharactersInSystem(Table table)
         {
             var path = GetApplicationPath(Constants.WebAppRelativePath);
             path = Path.Combine(path, "bin") + "/Characters.json";
@@ -118,14 +118,77 @@ namespace HoS_AP.Web.Tests
             File.WriteAllText(path, JsonConvert.SerializeObject(characters));
         }
 
-        public static T ParseEnum<T>(string value)
+        [When(@"I fill in controls as follows")]
+        public void IFillInControlsAsFollows(Table table)
         {
-            return (T)Enum.Parse(typeof(T), value, true);
+            foreach (var row in table.Rows)
+            {
+                var element = InternetExplorerDriver.FindElement(By.Name(row[0]));
+                var elementType = element.GetAttribute("type");
+                if (elementType == "text" || elementType == "password")
+                {
+                    element.Clear();
+                    element.SendKeys(row[1]);
+                }
+                if (elementType == "select-one")
+                {
+                    var selectElement = new SelectElement(element);
+                    selectElement.SelectByText(row[1]);
+                }
+                if (elementType == "checkbox")
+                {
+                    var needToBeChecked = Convert.ToBoolean(row[1]);
+                    if ((element.Selected && !needToBeChecked) || (!element.Selected && needToBeChecked))
+                    {
+                        element.Click();
+                    }
+                }
+            }
         }
 
+        [When(@"I click ""(.*)"" button")]
+        public void IClickButton(string buttonName)
+        {
+            try
+            {
+                var input =
+                    InternetExplorerDriver.FindElementByXPath(string.Format(".//input[@type='submit' and @value='{0}']", buttonName));
+                input.Submit();
+            }
+            catch
+            {
+                var button = 
+                    InternetExplorerDriver.FindElementByXPath(string.Format(".//button[@type='button' and text()='{0}']", buttonName));
+                button.Click();
+            }
+        }
+
+        [Given(@"Given there is are following users in the system")]
+        public void ThereIsAreFollowingUsersInTheSystem(Table table)
+        {
+            var path = GetApplicationPath(Constants.WebAppRelativePath);
+            path = Path.Combine(path, "bin") + "/Accounts.json";
+            if (File.Exists(path))
+            {
+                File.Delete(path);
+            }
+
+            var accounts = new List<Account>();
+            var service = new EncryptionService();
+            foreach (var tableRow in table.Rows)
+            {
+                accounts.Add(new Account
+                {
+                    UserName = tableRow[0],
+                    Password = service.CreateHash(tableRow[1])
+                });
+            }
+
+            File.WriteAllText(path, JsonConvert.SerializeObject(accounts));
+        }
 
         [Then(@"I should see character in list")]
-        public void ThenIShouldSeeCharacterInList(Table table)
+        public void IShouldSeeCharacterInList(Table table)
         {
             var charactersHtmlTable = InternetExplorerDriver.FindElementByTagName("table");
             var tbody = charactersHtmlTable.FindElement(By.TagName("tbody"));
@@ -161,10 +224,22 @@ namespace HoS_AP.Web.Tests
             }
         }
 
-        [Then(@"I should be on “(.*)” page")]
-        public void ThenIShouldBeOnCharacterListingPage(string pageName)
+        [When(@"I navigate to “(.*)” page")]
+        public void INavigateToPage(string pageName)
         {
-            Assert.AreEqual(InternetExplorerDriver.Url, UrlManager.GetPage(PageTypes.Listing));
+            InternetExplorerDriver.Navigate().GoToUrl(UrlManager.GetPage(pageName));
+        }
+
+        [Then(@"I should be on “(.*)” page")]
+        public void IShouldBeOnPage(string pageName)
+        {
+            var url = InternetExplorerDriver.Url;
+            if (url.IndexOf("?") > -1)
+            {
+                url = url.Remove(url.IndexOf("?"));
+            }
+
+            Assert.AreEqual(UrlManager.GetPage(pageName), url);
         }
     }
 }

@@ -18,21 +18,21 @@ namespace HoS_AP.Web.Tests
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "2.1.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [NUnit.Framework.TestFixtureAttribute()]
-    [NUnit.Framework.DescriptionAttribute("Listing")]
-    public partial class ListingFeature
+    [NUnit.Framework.DescriptionAttribute("Recover character")]
+    public partial class RecoverCharacterFeature
     {
         
         private TechTalk.SpecFlow.ITestRunner testRunner;
         
-#line 1 "Feature_1.feature"
+#line 1 "Feature_5.feature"
 #line hidden
         
         [NUnit.Framework.TestFixtureSetUpAttribute()]
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Listing", "    As a Heroes of Storm Administrator\r\n    In order to feel control over system " +
-                    "state\r\n    I want to see existing characters in list", ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Recover character", "    As a Heroes of Storm Administrator\r\n    In order to feel control over system " +
+                    "state\r\n    I want to be able to recover character", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -65,10 +65,10 @@ namespace HoS_AP.Web.Tests
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("See characters in listing")]
-        public virtual void SeeCharactersInListing()
+        [NUnit.Framework.DescriptionAttribute("Beeing able to recover character")]
+        public virtual void BeeingAbleToRecoverCharacter()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("See characters in listing", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Beeing able to recover character", ((string[])(null)));
 #line 6
 this.ScenarioSetup(scenarioInfo);
 #line hidden
@@ -83,12 +83,16 @@ this.ScenarioSetup(scenarioInfo);
                         "10.00",
                         "Assassin",
                         "True",
-                        "False"});
+                        "True"});
 #line 7
     testRunner.Given("there are the following characters in system", ((string)(null)), table1, "Given ");
 #line 10
     testRunner.When("I am logged in as “Megan”", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 11
+        testRunner.And("I navigate to “Edit Zeratul” page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 12
+        testRunner.And("I click \"Recover\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 13
     testRunner.Then("I should be on “Listing” page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
@@ -103,8 +107,8 @@ this.ScenarioSetup(scenarioInfo);
                         "Assassin",
                         "True",
                         "False"});
-#line 12
-        testRunner.And("I should see character in list", ((string)(null)), table2, "And ");
+#line 14
+    testRunner.And("I should see character in list", ((string)(null)), table2, "And ");
 #line hidden
             this.ScenarioCleanup();
         }
