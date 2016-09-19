@@ -11,6 +11,8 @@ using HoS_AP.Misc;
 
 namespace HoS_AP.DI
 {
+    using HoS_AP.DAL.EFDao;
+
     public sealed class InversionOfControlContainer : IInversionOfControlContainer
     {
         private IContainer container;
@@ -28,8 +30,8 @@ namespace HoS_AP.DI
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling")]
         private void RegisterServices()
         {
-            Register(new TypeDependencyDescription<IAccountDao, AccountDao>(), Reuse.Singleton);
-            Register(new TypeDependencyDescription<ICharacterDao, CharacterDao>(), Reuse.Singleton);
+            Register(new TypeDependencyDescription<IAccountDao, EFAccountDao>(), Reuse.Singleton);
+            Register(new TypeDependencyDescription<ICharacterDao, EFCharacterDao>(), Reuse.Singleton);
             Register(new TypeDependencyDescription<IValidationMessageProvider, ValidationMessageProvider>(), Reuse.Singleton);
             Register(new TypeDependencyDescription<IValidationService, ValidationService>(), Reuse.Singleton);
             Register(new TypeDependencyDescription<IEncryptionService, EncryptionService>(), Reuse.Singleton);

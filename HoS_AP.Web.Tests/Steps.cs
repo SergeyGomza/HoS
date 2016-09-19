@@ -18,6 +18,8 @@ using Table = TechTalk.SpecFlow.Table;
 
 namespace HoS_AP.Web.Tests
 {
+    using HoS_AP.DAL.EF;
+
     [Binding]
     public class Steps
     {
@@ -93,29 +95,55 @@ namespace HoS_AP.Web.Tests
         [Given(@"there are the following characters in system")]
         public void ThereAreTheFollowingCharactersInSystem(Table table)
         {
-            var path = GetApplicationPath(Constants.WebAppRelativePath);
-            path = Path.Combine(path, "bin") + "/Characters.json";
-            if (File.Exists(path))
-            {
-                File.Delete(path);
-            }
-
-            var characters = new List<Character>();
-            foreach (var tr in table.Rows)
-            {
-                characters.Add(new Character
+            using (var context = new DatabaseContext())
                 {
-                    Id= Guid.NewGuid(),
-                    Created = DateTime.Now,
-                    Name = tr[0],
-                    Price = Convert.ToDecimal(tr[1]),
-                    Type = (CharacterTypes)Enum.Parse(typeof(CharacterTypes), tr[2], true),
-                    Active = Convert.ToBoolean(tr[3]),
-                    Deleted = Convert.ToBoolean(tr[4])
-                });
-            }
+                    if (context.Characters.Any())
+                    {
+                        context.Characters.RemoveRange(context.Characters.AsEnumerable());
+                    }
 
-            File.WriteAllText(path, JsonConvert.SerializeObject(characters));
+                    context.SaveChanges();
+
+                    foreach (var tr in table.Rows)
+                    {
+                        context.Characters.Add(new Character
+                        {
+                            Id = Guid.NewGuid(),
+                            Created = DateTime.Now,
+                            Name = tr[0],
+                            Price = Convert.ToDecimal(tr[1]),
+                            Type = (CharacterTypes)Enum.Parse(typeof(CharacterTypes), tr[2], true),
+                            Active = Convert.ToBoolean(tr[3]),
+                            Deleted = Convert.ToBoolean(tr[4]),
+                        });
+                    }
+
+                    context.SaveChanges();
+                }
+
+            //var path = GetApplicationPath(Constants.WebAppRelativePath);
+            //path = Path.Combine(path, "bin") + "/Characters.json";
+            //if (File.Exists(path))
+            //{
+            //    File.Delete(path);
+            //}
+
+            //var characters = new List<Character>();
+            //foreach (var tr in table.Rows)
+            //{
+            //    characters.Add(new Character
+            //    {
+            //        Id= Guid.NewGuid(),
+            //        Created = DateTime.Now,
+            //        Name = tr[0],
+            //        Price = Convert.ToDecimal(tr[1]),
+            //        Type = (CharacterTypes)Enum.Parse(typeof(CharacterTypes), tr[2], true),
+            //        Active = Convert.ToBoolean(tr[3]),
+            //        Deleted = Convert.ToBoolean(tr[4])
+            //    });
+            //}
+
+            //File.WriteAllText(path, JsonConvert.SerializeObject(characters));
         }
 
         [When(@"I fill in controls as follows")]
@@ -166,25 +194,46 @@ namespace HoS_AP.Web.Tests
         [Given(@"Given there is are following users in the system")]
         public void ThereIsAreFollowingUsersInTheSystem(Table table)
         {
-            var path = GetApplicationPath(Constants.WebAppRelativePath);
-            path = Path.Combine(path, "bin") + "/Accounts.json";
-            if (File.Exists(path))
-            {
-                File.Delete(path);
-            }
-
-            var accounts = new List<Account>();
-            var service = new EncryptionService();
-            foreach (var tableRow in table.Rows)
-            {
-                accounts.Add(new Account
+            using (var context = new DatabaseContext())
                 {
-                    UserName = tableRow[0],
-                    Password = service.CreateHash(tableRow[1])
-                });
-            }
+                    if (context.Accounts.Any())
+                    {
+                        context.Accounts.RemoveRange(context.Accounts.AsQueryable());
+                    }
 
-            File.WriteAllText(path, JsonConvert.SerializeObject(accounts));
+                    var service = new EncryptionService();
+
+                    foreach (var tableRow in table.Rows)
+                    {
+                        context.Accounts.Add(new Account
+                        {
+                            UserName = tableRow[0],
+                            Password = service.CreateHash(tableRow[1])
+                        });
+                    }
+
+                    context.SaveChanges();
+                }
+
+            //var path = GetApplicationPath(Constants.WebAppRelativePath);
+            //path = Path.Combine(path, "bin") + "/Accounts.json";
+            //if (File.Exists(path))
+            //{
+            //    File.Delete(path);
+            //}
+
+            //var accounts = new List<Account>();
+            //var service = new EncryptionService();
+            //foreach (var tableRow in table.Rows)
+            //{
+            //    accounts.Add(new Account
+            //    {
+            //        UserName = tableRow[0],
+            //        Password = service.CreateHash(tableRow[1])
+            //    });
+            //}
+
+            //File.WriteAllText(path, JsonConvert.SerializeObject(accounts));
         }
 
         [Then(@"I should see character in list")]
