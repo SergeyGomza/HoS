@@ -25,17 +25,16 @@
             protected override void Seed(DatabaseContext db)
             {
                 db.Accounts.Add(new Account { UserName = "Megan", Password = "1000:KmPsJ6b8qrf5d0flq2JZ7pZfXFiIZWfK:VeuXPEkDBL5B3rCCfE7OPVLumsX0NAJT" });
-                //db.Characters.Add(
-                //    new Character()
-                //        {
-                //            Name = "Zeratul",
-                //            Type = CharacterTypes.Assassin,
-                //            Created = DateTime.Now,
-                //            Active = true,
-                //            Deleted = false
-                //        });
+
                 db.SaveChanges();
             }
+        }
+
+        // unused method to include EntityFramework.SqlServerlibrary by copy in bin folder executable project
+        // like http://robsneuron.blogspot.com.by/2013/11/entity-framework-upgrade-to-6.html (Copy Local was not enough)
+        static void FixEfProviderServicesProblem()
+        {
+            var instance = System.Data.Entity.SqlServer.SqlProviderServices.Instance;
         }
     }
 }
