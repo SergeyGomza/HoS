@@ -6,6 +6,8 @@ using HoS_AP.Misc;
 
 namespace HoS_AP.BLL.Models
 {
+    using System.ComponentModel.DataAnnotations;
+
     public class CharacterEditModel
     {
         public CharacterEditModel()
@@ -24,12 +26,16 @@ namespace HoS_AP.BLL.Models
 
         public Guid Id { get; set; }
 
+        [Display(Name = "CharacterName", ResourceType = typeof(Resources.Resource))]
         public string Name { get; set; }
 
+        [Display(Name = "CharacterType", ResourceType = typeof(Resources.Resource))]
         public CharacterTypes Type { get; set; }
 
+        [Display(Name = "CharacterPrice", ResourceType = typeof(Resources.Resource))]
         public decimal Price { get; set; }
 
+        [Display(Name = "CharacterActive", ResourceType = typeof(Resources.Resource))]
         public bool Active { get; set; }
 
         public bool Deleted { get; set; }

@@ -137,6 +137,8 @@
   <ItemGroup>
     <Compile Include="Controllers\CharacterController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="EnumExtension.cs" />
+    <Compile Include="Filters\LanguageAttribute.cs" />
     <Compile Include="ModelErrorExtension.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

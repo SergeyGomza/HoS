@@ -5,6 +5,15 @@ using System.Web.Security;
 
 namespace HoS_AP.Web.Controllers
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Globalization;
+    using System.Threading;
+    using System.Web;
+
+    using HoS_AP.Web.Filters;
+
+    [Language]
     public class AccountController : Controller
     {
         private readonly IAccountService accountService;
@@ -44,6 +53,35 @@ namespace HoS_AP.Web.Controllers
         {
             FormsAuthentication.SignOut();
             return RedirectToAction("Login");
+        }
+        
+        [Route("Account/ChangeLanguage")]
+        public ActionResult ChangeLanguage(string lang)
+        {
+            string returnUrl = Request.UrlReferrer.AbsolutePath;
+            // list of cultures
+            List<string> cultures = new List<string> { "ru", "en"};
+            if (!cultures.Contains(lang))
+            {
+                lang = "en";
+            }
+            // save selected culture in cookies
+            HttpCookie cookie = Request.Cookies["lang"];
+            if (cookie != null)
+                cookie.Value = lang;
+            else
+            {
+                cookie = new HttpCookie("lang")
+                {
+                    HttpOnly = false, 
+                    Value = lang, 
+                    Expires = DateTime.Now.AddYears(1)
+                };
+            }
+
+            Response.Cookies.Add(cookie);
+
+            return Redirect(returnUrl);
         }
     }
 }

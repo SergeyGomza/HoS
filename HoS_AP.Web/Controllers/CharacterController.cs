@@ -4,6 +4,14 @@ using HoS_AP.BLL.ServiceInterfaces;
 
 namespace HoS_AP.Web.Controllers
 {
+    using System.Collections.Generic;
+    using System.Globalization;
+    using System.Threading;
+    using System.Web;
+
+    using HoS_AP.Web.Filters;
+
+    [Language]
     [Authorize, RoutePrefix("characters")]
     public class CharacterController : Controller
     {

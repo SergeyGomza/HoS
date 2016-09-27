@@ -4,6 +4,8 @@ using HoS_AP.BLL.ServiceInterfaces;
 
 namespace HoS_AP.BLL.Validation.Validators
 {
+    using System.Security.Cryptography.X509Certificates;
+
     internal class AuthenticationValidator : AbstractValidator<AuthenticationModel>
     {
         public AuthenticationValidator(IValidationMessageProvider validationMessageProvider)

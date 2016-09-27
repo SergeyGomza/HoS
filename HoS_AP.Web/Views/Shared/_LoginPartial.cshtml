@@ -6,12 +6,25 @@
         {
             <li>
                 <span class="hidden-xs" style="color: #9d9d9d; display: block; font-size: 12px; padding-top: 18px; position: relative;">
-                    Hello @User.Identity.Name
+                    @Resources.Resource.Greeting @User.Identity.Name
                 </span>
             </li>
             <li> 
-                <a href="javascript:document.getElementById('logoutForm').submit()">Log off</a>
+                <a href="javascript:document.getElementById('logoutForm').submit()">@Resources.Resource.LogOff</a>
             </li>
         }
+        @{  
+            var curLang = "en";
+            if (Request.Cookies["lang"] != null)
+            {
+                curLang = Request.Cookies["lang"].Value;
+            }
+        }
+        <li>
+            @Html.ActionLink("En", "ChangeLanguage", "Account", new { lang = "en" }, curLang == "en" ? new { @class = "active_lang" } : null)
+        </li>
+        <li>
+            @Html.ActionLink("Ru", "ChangeLanguage", "Account", new { lang = "ru" }, curLang == "ru" ? new { @class = "active_lang" } : null)
+        </li>
     </ul>
 }

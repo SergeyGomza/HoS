@@ -1,16 +1,17 @@
-﻿@model ICollection<HoS_AP.BLL.Models.CharacterListItemModel>
+﻿@using HoS_AP.Web
+@model ICollection<HoS_AP.BLL.Models.CharacterListItemModel>
 @{
-    ViewBag.Title = "Characters List";
+    ViewBag.Title = @Resources.Resource.CharactersList;
 }
 
-<h2>Character List</h2>
+<h2>@Resources.Resource.CharactersList</h2>
 <div class="row">
     <div class="col-md-12">
         <section id="loginForm">
 
             <div class="form-group">
                 <div class="col-md-offset-11 col-md-1">
-                    <a href="@Url.Action("Add")" class="btn btn-info pull-right" role="button">Add</a>
+                    <a href="@Url.Action("Add")" class="btn btn-info pull-right" role="button">@Resources.Resource.Add</a>
                 </div>
             </div>
 
@@ -18,22 +19,22 @@
                 <thead>
                 <tr>
                     <th>
-                        Name
+                        @Resources.Resource.CharacterName
                     </th>
                     <th>
-                        Type
+                        @Resources.Resource.CharacterType
                     </th>
                     <th>
-                        Created
+                        @Resources.Resource.CaracterCreated
                     </th>
                     <th>
-                        Price
+                        @Resources.Resource.CharacterPrice
                     </th>
                     <th>
-                        Active
+                        @Resources.Resource.CharacterActive
                     </th>
                     <th>
-                        Deleted
+                        @Resources.Resource.CharacterDeleted
                     </th>
                     <th>
 
@@ -48,7 +49,7 @@
                             @character.Name
                         </td>
                         <td class="col-md-2">
-                            @character.Type
+                            @Html.GetEnumName(character.Type)
                         </td>
                         <td class="col-md-2">
                             @character.Created
@@ -63,7 +64,7 @@
                             @character.Deleted
                         </td>
                         <th>
-                            @Html.ActionLink("Edit", "Edit", "Character", new {name = character.Name}, null)
+                            @Html.ActionLink(Resources.Resource.Edit, "Edit", "Character", new {name = character.Name}, null)
                         </th>
                     </tr>
                 }
@@ -72,7 +73,7 @@
 
             <div class="form-group">
                 <div class="col-md-offset-11 col-md-1">
-                    <a href="@Url.Action("Add")" class="btn btn-info pull-right" role="button">Add</a>
+                    <a href="@Url.Action("Add")" class="btn btn-info pull-right" role="button">@Resources.Resource.Add</a>
                 </div>
             </div>
         </section>
