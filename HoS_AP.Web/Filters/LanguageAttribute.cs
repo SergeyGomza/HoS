@@ -11,7 +11,7 @@
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             string cultureName = null;
-            
+
             HttpCookie cultureCookie = filterContext.HttpContext.Request.Cookies["lang"];
 
             cultureName = cultureCookie != null ? cultureCookie.Value : "en";

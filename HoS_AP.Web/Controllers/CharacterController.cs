@@ -11,7 +11,7 @@ namespace HoS_AP.Web.Controllers
 
     using HoS_AP.Web.Filters;
 
-    [Language]
+    //[Language]
     [Authorize, RoutePrefix("characters")]
     public class CharacterController : Controller
     {
