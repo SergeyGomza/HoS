@@ -8,23 +8,23 @@ namespace HoS_AP.BLL.Validation
 {
     internal class ValidationService : IValidationService
     {
-        private readonly AuthenticationValidator authenticationValidator;
-        private readonly CharacterEditModelValidator characterEditModelValidator;
+        private readonly IValidationMessageProvider validationMessageProvider;
+        private readonly ICharacterDao characterDao;
 
         public ValidationService(ICharacterDao characterDao, IValidationMessageProvider validationMessageProvider)
         {
-            authenticationValidator = new AuthenticationValidator(validationMessageProvider);
-            characterEditModelValidator = new CharacterEditModelValidator(characterDao, validationMessageProvider);
+            this.characterDao = characterDao;
+            this.validationMessageProvider = validationMessageProvider;
         }
 
         ICollection<ValidationError> IValidationService.Validate(AuthenticationModel model)
         {
-            return authenticationValidator.Validate(model).Errors.ToValidationResultItem();
+            return new AuthenticationValidator(validationMessageProvider).Validate(model).Errors.ToValidationResultItem();
         }
 
         ICollection<ValidationError> IValidationService.Validate(CharacterEditModel model)
         {
-            return characterEditModelValidator.Validate(model).Errors.ToValidationResultItem();
+            return new CharacterEditModelValidator(characterDao, validationMessageProvider).Validate(model).Errors.ToValidationResultItem();
         }
     }
 }

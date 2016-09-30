@@ -13,7 +13,7 @@ namespace HoS_AP.Web.Controllers
 
     using HoS_AP.Web.Filters;
 
-    //[Language]
+    [Language]
     public class AccountController : Controller
     {
         private readonly IAccountService accountService;
